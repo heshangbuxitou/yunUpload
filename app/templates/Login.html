@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>登陆</title>
+	<style>
+		.right {
+			margin-top:10px;
+		}
+		.button {
+			margin-top:10px;
+			float: right;
+			display: block;
+			width: 100px;
+
+		}
+		.p {
+			position: absolute;
+			border: none;
+			background: #33FFFF;
+			left: 45%;
+			top: 50%;
+		}
+
+	</style>
+</head>
+<body background={{ url_for('static', filename='5.2.jpg')}}  style="background-size:cover">
+	<div>
+		{% if not session.get('user') %}
+			<div class="right"><button class="button"><a href={{ url_for('main.login')}}>管理员登录</a></button></div>
+		{% endif %}
+		{% include 'base.html' %}
+		<div>
+			{% if session.get('user') %}
+				<p>欢迎你，管理员</p>
+				<a href="/logout">注销</a>
+			{% else %}
+				<p>欢迎你，普通用户</p>
+			{% endif %}
+		</div>
+
+		<div class="p">
+			<input type="button" value="欢迎来到老司机大家庭" onclick="myfunction2()">
+		</div>
+
+	</div>
+	<script>
+	function myfunction1() {
+		window.location.href = "/login";
+	}
+
+	function myfunction2() {
+		window.location.href = "/filelist";
+	}
+	</script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>管理员登陆</title>
+		<style>
+			.right {
+					margin-top:10px;
+				}
+				.button {
+					margin-top:10px;
+					float: right;
+					display: block;
+					width: 100px;
+
+				}
+		</style>
+</head>
+<body background={{ url_for('static', filename='5.2.jpg')}} style="background-size:cover">
+	<div class="login">
+		{% include 'base.html' %}
+		{% for message in get_flashed_messages() %}
+    		<h3 class="center" ><font color="red"> {{message}} </font></h3>
+		{% endfor %}
+		<form action= {{ url_for('main.login')}} method="post">
+			<table align="center" border="1" >
+			<tr align="center">
+				<td align="right">账号：</td>
+				<td align="left"><input type="text" id="userName" name="username"></td>
+			</tr>
+			<tr align="center">
+				<td align="right">密码：</td>
+				<td align="left"><input type="password" id="password" name="password"></td>
+			</tr>
+			<tr align="center">
+				<td colspan="2"><input type="submit" value="登陆"></td>
+			</tr>
+		</table>
+		</form>
+	</div>
+
+	<script>
+	function myfunction() {
+			
+	}
+	</script>
+</body>
+</html>

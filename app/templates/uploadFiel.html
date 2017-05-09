@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>文件管理</title>
+	<style>
+		.right {
+			margin-top:10px;
+		}
+		.button {
+			margin-top:10px;
+			float: right;
+			display: block;
+			width: 100px;
+
+		}
+	</style>
+</head>
+<body background={{ url_for('static', filename='5.2.jpg')}} style="background-size:cover">
+		{% include "base.html" %}
+		{% for message in get_flashed_messages() %}
+    		<h3 class="center" ><font color="red"> {{message}} </font></h3>
+		{% endfor %}
+	<table bgcolor="#FFE6D9">
+		{% for file in files %}
+		<tr>
+			<td><font size="3" color="#000079" face="Comic Sans MS"><marquee>{{file.filename}}</marquee></font></td>
+			<td><font size="3" color="#000079" face="Small Fonts">{{file.time}}</font></td>
+			<td><a href={{url_for('main.download',id=file.id)}}>下载</a></td>
+			{% if session.get('user')%}
+				<td><a href={{url_for('main.delete',id=file.id)}}>删除</a></td>
+			{% endif %}
+		</tr>
+		{% endfor %}
+	</table>
+</body>
+</html>
