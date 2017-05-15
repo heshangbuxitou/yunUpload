@@ -67,11 +67,13 @@ def uploadfile():
 def download(id):
     file = File.query.get_or_404(id)
     uuidname = os.path.split(file.uuidpath)[1]
-    response = send_from_directory(UPLOAD_FOLDER, uuidname, as_attachment=True)
-    if quote(file.filename)!=file.filename:
-        response.headers['Content-Disposition'] = "attachment; filename=\"%s\"; filename*=utf-8''%s" % (quote(file.filename),quote(file.filename))
-    else:
-        response.headers['Content-Disposition'] = "attachment; filename=\"%s\"" % file.filename
+    # response = send_from_directory(UPLOAD_FOLDER, uuidname, as_attachment=True)
+    # if quote(file.filename)!=file.filename:   因为http头无法存储中文，只能转化为urlencode编码
+    #     response.headers['Content-Disposition'] = "attachment; filename=\"%s\"; filename*=utf-8''%s" % (quote(file.filename),quote(file.filename))
+    # else:
+    #     response.headers['Content-Disposition'] = "attachment; filename=\"%s\"" % file.filename
+    # return response
+    response = send_from_directory(UPLOAD_FOLDER, uuidname, mimetype="application/octet-stream", as_attachment=True, attachment_filename = quote(file.filename))
     return response
 
 @main.route('/delete/<int:id>')
